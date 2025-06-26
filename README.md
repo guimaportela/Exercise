@@ -76,3 +76,15 @@ Person 2 is over the planned Budget of $0.
 
 ----------------------------------------------------------------------------------
 ```
+
+## 6. 📁 Project Files
+
+### Files Added/Modified in Latest Implementation
+The following files were added or modified:
+
+**📄 New Files Added:**
+- `Admin.js` - Contains admin menu functionality and password authentication logic
+- `README.md` - Project documentation and usage guidelines  
+- `Report.js` - Monthly comparative report generation and formatting logic
+
+These files together implement the complete PROSPR Plan enhancement with admin controls and automated reporting capabilities.
