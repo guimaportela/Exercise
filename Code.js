@@ -1,5 +1,12 @@
 function onOpen() {
   ProsprScript.onOpen();
+
+  SpreadsheetApp.getUi()
+      .createMenu('Admin')
+      .addItem('Access', 'authenticateAdmin')
+      .addItem('Reset Password', 'setupAdminPassword')
+      .addToUi();
+  Logger.log("Admin Menu Item created")
 }
 
 function setView() {
