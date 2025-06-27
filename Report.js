@@ -2,6 +2,9 @@
  * Generates report in a new spreadsheet sheet
  */
 function generateReportInSheet() {
+  var userEmail = Session.getEffectiveUser().getEmail();
+  Logger.log('Report generation STARTED (Sheet format) by user: ' + userEmail);
+  
   const reportContent = buildReportLogic();
   if (reportContent) {
     createReportAsNewSheet(reportContent);
@@ -12,6 +15,9 @@ function generateReportInSheet() {
  * Generates report as Gmail draft
  */
 function generateReportAsDraft() {
+  var userEmail = Session.getEffectiveUser().getEmail();
+  Logger.log('Report generation STARTED (Email format) by user: ' + userEmail);
+  
   const reportContent = buildReportLogic();
   if (reportContent) {
     createReportAsGmailDraft(reportContent);
@@ -46,9 +52,9 @@ function buildReportLogic() {
   // Get the spreadsheet and locate the budget sheet
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   const budgetSheet = spreadsheet.getSheetByName(CONFIG.SHEET_NAME);
-  
-  // Validate that the required sheet exists
+    // Validate that the required sheet exists
   if (!budgetSheet) {
+    Logger.log('Report generation FAILED: "' + CONFIG.SHEET_NAME + '" sheet not found');
     SpreadsheetApp.getUi().alert('Error: "' + CONFIG.SHEET_NAME + '" sheet not found.');
     return null;
   }
@@ -84,11 +90,11 @@ function createReportAsNewSheet(reportContent) {
   } else {
     reportSheet = ss.insertSheet(sheetName);
   }
-  
-  reportSheet.getRange('B2').setValue(reportContent).setFontFamily('Consolas').setFontSize(10);
+    reportSheet.getRange('B2').setValue(reportContent).setFontFamily('Consolas').setFontSize(10);
   reportSheet.autoResizeColumn(1);
   ss.setActiveSheet(reportSheet);
   
+  Logger.log('Report generation COMPLETED successfully in sheet format');
   SpreadsheetApp.getUi().alert('Success!', 'Report created in the "' + sheetName + '" sheet.', SpreadsheetApp.getUi().ButtonSet.OK);
 }
 
@@ -100,9 +106,9 @@ function createReportAsGmailDraft(reportContent) {
   const body = 'Hello,\n\nHere is the monthly budget comparison summary:\n\n' + reportContent + '\n\nBest regards,';
   
   const htmlBody = body.replace(/\n/g, '<br>');
-
   GmailApp.createDraft('', subject, body, { htmlBody: htmlBody });
   
+  Logger.log('Report generation COMPLETED successfully in email format');
   SpreadsheetApp.getUi().alert('Success!', 'A draft email with the report has been created in your Gmail.', SpreadsheetApp.getUi().ButtonSet.OK);
 }
 

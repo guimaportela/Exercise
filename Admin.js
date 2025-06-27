@@ -3,6 +3,7 @@
  */
 function authenticateAdmin() {
   var ui = SpreadsheetApp.getUi();
+  var userEmail = Session.getEffectiveUser().getEmail();
   
   // Read the securely stored password
   var storedPassword = PropertiesService.getScriptProperties().getProperty('ADMIN_PASSWORD');
@@ -15,13 +16,16 @@ function authenticateAdmin() {
   
   var response = ui.prompt('Restricted Access', 'Please enter the administrator code:', ui.ButtonSet.OK_CANCEL);
 
-  if (response.getSelectedButton() == ui.Button.OK) {
-    // Compare the entered password with the secure password
+   if (response.getSelectedButton() == ui.Button.OK) {
     if (response.getResponseText() == storedPassword) {
+      Logger.log('Admin access SUCCEEDED for user: ' + userEmail);
       showAdminMenu();
     } else {
-      ui.alert('Error', 'Incorrect administrator code.', ui.ButtonSet.OK);
+      Logger.log('Admin access FAILED for user: ' + userEmail);
+      ui.alert('Error', 'Incorrect administrator code.');
     }
+  } else {
+    Logger.log('Admin access cancelled by user: ' + userEmail);
   }
 }
 

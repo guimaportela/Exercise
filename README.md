@@ -45,6 +45,7 @@ The final solution includes the following key features:
 
 - **Password-Protected Admin Access**: A robust authentication flow protects the administrative functions. The password can be changed at any time.
 - **Secure, No-Hardcoding Password Storage**: The administrator password is not hard-coded into the script. It is stored securely using Google Apps Script's PropertiesService, preventing exposure to users with read-only access and allowing the spreadsheet owner to change it continuously without editing the code.
+- **Security Audit Logging**: The system automatically logs all admin authentication attempts (successful, failed, and cancelled) with user email identification for security monitoring and audit trail purposes.
 
 ## 5. 🚀 Demo and Report Format
 
