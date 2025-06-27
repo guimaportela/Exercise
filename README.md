@@ -52,6 +52,8 @@ The final solution includes the following key features:
 ### 🌐 Live Demo
 The complete working solution can be accessed at: https://docs.google.com/spreadsheets/d/1iWqLeO79fmewgs78_y7FaYcW7wqp_0FS9_otGjZW0K8/edit?usp=sharing
 
+**Admin Access:** To test the admin functionality, use the password `prospr` when prompted to access the Admin menu.
+
 ### 📄 Report Output Format
 When generating reports (both email drafts and spreadsheet), the output follows this standardized format. For spreadsheet output, the report is created in a new tab named "Monthly_Comparative_Report":
 
